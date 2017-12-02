@@ -39,6 +39,10 @@ async def on_message(message):
         line = f.readline()
         line = line.strip("\n")
         await bot.send_message(discord.Object(id=line),message.content)
+        f.close()
+        w = open("post.txt", "w")
+        w.write(message.content)
+        w.close()
     if message.content == '!setPost':
         w = open("channel.txt", "w")
         w.write(str(message.channel.id))
