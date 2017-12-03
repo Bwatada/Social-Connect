@@ -1,3 +1,0 @@
-__underline__
-*italics*
-**bold**
