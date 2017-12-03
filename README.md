@@ -11,6 +11,6 @@ After doing so, one must simply send the bot a private message and the desired a
 
 Usage:
 
-**!setPost** - sets the desired channel for announcements to be made
-**!post [message]** - posts entered message to predetermined facebook page.
-**!read** - reads latest post from Facebook page and posts it in desired channel.
+- **!setPost** - sets the desired channel for announcements to be made
+- **!post [message]** - posts entered message to predetermined facebook page.
+- **!read** - reads latest post from Facebook page and posts it in desired channel.
