@@ -7,4 +7,10 @@ When using the bot for the first time, use the command !setPost in the desired c
 
 After doing so, one must simply send the bot a private message and the desired actions will be performed within the set channel.
 
-**The bot will only recognize the command if it is sent my private message**
+**The bot will only recognize the command if it is sent by private message.**
+
+Usage:
+
+**!setPost** - sets the desired channel for announcements to be made
+**!post [message]** - posts entered message to predetermined facebook page.
+**!read** - reads latest post from Facebook page and posts it in desired channel.
