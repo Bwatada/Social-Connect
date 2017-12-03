@@ -21,35 +21,22 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+	print(message.content[:5])
 	if message.author == bot.user:
 		return
-	if message.server == None and message.content == "!read":
+	if message.server == None and message.content[:5] == "!read":
+
 			app_id= '306163839896677'
 			app_secret= 'b46fed8fbb1539af3827de7009c750a8'
 			access_token= app_id + "|" + app_secret
-			page_name = input("Please enter your facebook page url: ")
+			page_name = message.content[6:]
 			graph = facebook.GraphAPI(access_token, 2.11)#Request access
-
 			site_info =  graph.get_object(id=page_name, field= 'message') #Get id of page
 			post =  graph.get_connections(id=site_info["id"], connection_name = 'posts') #Get posts of page
-
 			post = post['data'][0]['message']
 
+			await bot.send_message(message.channel, post)
 
-			post_data = open('post_data.txt','wb')
-			post_data.write(post.encode("UTF-8")) #Saves the most recent post in file
-			post_data.close()
-			with open ('post_data.txt') as f:
-				data = f.readlines()
-			for line in data:
-				words = line.split()
-				if words == []:
-					continue
-			else:
-				words += "\n"
-				words = " ".join(words) 
-				await bot.send_message(discord.Object(id=line), words)
-			f.close()
 	if message.server == None:
 		f = open("channel.txt", "r")
 		line = f.readline()
@@ -59,6 +46,20 @@ async def on_message(message):
 		w = open("channel.txt", "w")
 		w.write(str(message.channel.id))
 		w.close()
+	if message.content[:5] == "!post":
+		message = message.content[6:]
+		cfg = {
+		"page_id" : "1772893583011687",
+		"access_token" : "EAACEdEose0cBAEAU3gsrqgrSpMtwKiJGWMef9yZCkzfc7PIaeummZBqUK9unzl2Ii7PqhtaJjtXXv9npiCcIaUhKMOnrZBLQZCsYXnzOIIqfIoKKA5VzWxJHuZA2DnfZB9NBKrirerceWY89lO7bfAOFF37HShqt6i8fn5byZAQ18GbMQemNire20lZBfvmKiTIe1R0iVPZBWZAwZDZD"
+		}
+		graph = facebook.GraphAPI(cfg["access_token"])
+		resp = graph.get_object("me/accounts")
+		page_access_token=None
+		for page in resp["data"]:
+			if page["id"] == cfg["page_id"]:
+				page_access_token = page["access_token"]
+			graph = facebook.GraphAPI(page_access_token)
+		success = graph.put_wall_post(message)
        
 
 bot.run('MzU3NzIzNzYyMDkyODAyMDUw.DQP9Eg.K4m6VXRtCZMlvvO53uE51mraANs')
