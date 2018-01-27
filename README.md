@@ -1,4 +1,4 @@
-# DisBook
+# Social Connect
 **This discord bot uses the Facebook and Discord API.**
 In order to use this bot, you must have the facebook module and discord.py modules installed.
 You must also be able to run the program in a terminal. We are planning to eventually host the bot on a server so you will be able to add it that way instead.
